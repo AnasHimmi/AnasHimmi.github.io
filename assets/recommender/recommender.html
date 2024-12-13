@@ -1,63 +1,287 @@
 <style>
-    #pca-cluster-tool {
-        font-family: Arial, sans-serif;
-        margin: 20px;
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #f7f7f7;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
 
-    input[type="range"] {
-        width: 300px;
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        animation: fadeIn 1s;
+        margin: 0 auto;
     }
 
-    #result {
+    .progress-bar {
+        height: 5px;
+        background: #eee;
+        position: relative;
+    }
+
+    .progress-bar div {
+        height: 100%;
+        background: #4CAF50;
+        width: 0;
+        transition: width 0.3s;
+    }
+
+    .content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .content h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #222;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    .slider {
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .slider-labels {
+        flex: 0 0 auto;
+        font-size: 0.9em;
+        color: #666;
+        width: 150px;
+        text-align: center;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .buttons button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: #ddd;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .buttons button.selected {
+        background: #4CAF50;
+        color: #fff;
+    }
+
+    .buttons button:hover {
+        background: #bbb;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
         margin-top: 20px;
-        font-weight: bold;
+    }
+
+    .button-container button {
+        padding: 10px 20px;
+        border: none;
+        background: #4CAF50;
+        color: #fff;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+        width: 120px;
+    }
+
+    .button-container button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+
+    .button-container button:hover:not(:disabled) {
+        background: #45a049;
+    }
+
+    .result {
+        display: none;
+        padding: 20px;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .result h2 {
+        font-size: 2em;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .images img {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .images img:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
     }
 </style>
 
-<div id="pca-cluster-tool">
-    <h2>PCA Cluster Match Tool</h2>
-    <form id="user-input-form">
-        <div id="sliders">
-            <label for="pc1">PC1</label>
-            <input type="range" id="pc1" name="PC1" min="-2" max="2" step="0.1" value="0">
-            <span id="pc1-value">0</span><br>
-
-            <label for="pc2">PC2</label>
-            <input type="range" id="pc2" name="PC2" min="-2" max="2" step="0.1" value="0">
-            <span id="pc2-value">0</span><br>
-
-            <!-- Repeat for PC3 to PC8 -->
-            <label for="pc3">PC3</label>
-            <input type="range" id="pc3" name="PC3" min="-2" max="2" step="0.1" value="0">
-            <span id="pc3-value">0</span><br>
-
-            <label for="pc4">PC4</label>
-            <input type="range" id="pc4" name="PC4" min="-2" max="2" step="0.1" value="0">
-            <span id="pc4-value">0</span><br>
-
-            <label for="pc5">PC5</label>
-            <input type="range" id="pc5" name="PC5" min="-2" max="2" step="0.1" value="0">
-            <span id="pc5-value">0</span><br>
-
-            <label for="pc6">PC6</label>
-            <input type="range" id="pc6" name="PC6" min="-2" max="2" step="0.1" value="0">
-            <span id="pc6-value">0</span><br>
-
-            <label for="pc7">PC7</label>
-            <input type="range" id="pc7" name="PC7" min="-2" max="2" step="0.1" value="0">
-            <span id="pc7-value">0</span><br>
-
-            <label for="pc8">PC8</label>
-            <input type="range" id="pc8" name="PC8" min="-2" max="2" step="0.1" value="0">
-            <span id="pc8-value">0</span><br>
+<div class="container">
+    <div class="progress-bar">
+        <div id="progress"></div>
+    </div>
+    <div class="content" id="question-container">
+        <h2 id="question">
+            When choosing a beer, do you focus more on general flavor profiles 
+            (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?
+        </h2>
+        <div class="slider">
+            <div class="slider-labels" id="slider-label-left">Famous/Specialty</div>
+            <div class="buttons" id="button-group">
+                <button data-value="-2"></button>
+                <button data-value="-1.33"></button>
+                <button data-value="-0.67"></button>
+                <button data-value="0" class="selected"></button>
+                <button data-value="0.67"></button>
+                <button data-value="1.33"></button>
+                <button data-value="2"></button>
+            </div>
+            <div class="slider-labels" id="slider-label-right">General Profiles</div>
         </div>
-        <button type="button" id="submit-button">Find Closest Cluster</button>
-    </form>
-    <div id="result"></div>
+        <!-- <div>Selected Value: <span id="selected-value">0</span></div> -->
+        <div class="button-container">
+            <button id="prev-button" disabled>Previous</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+    <div class="result" id="result-container" style="display: none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 2rem; color: #333; margin-bottom: 20px;">Your Beer Preference:</h2>
+        <h3 id="cluster-result" style="font-size: 1.5rem; color: #555; margin-bottom: 20px; font-weight: 600;">Cluster Title</h3>
+        <p id="cluster-description" style="font-size: 1rem; line-height: 1.6; color: #666; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Description of the beer cluster goes here. This text will provide insights into the type of beer that matches your preferences, making your choice more personalized and enjoyable.
+        </p>
+        <img id="result-image" src="" alt="Cluster Image" style="width: 80%; max-width: 400px; margin-top: 20px; border-radius: 8px; border: 1px solid #ddd;">
+    </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        const questions = [
+            {
+                text: "When choosing a beer, do you focus more on general flavor profiles (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?",
+                labels: ["Strongly Prefer Famous/Specialty", "Strongly Prefer General Flavor Profiles"],
+                images: ["specialty.jpg", "general.jpg"]
+            },
+            {
+                text: "Do you prefer rich, dark, roasted stouts and porters, or lighter, hoppy beers like IPAs?",
+                labels: ["Strongly Prefer Lighter, Hoppy Beers", "Strongly Prefer Dark, Roasted Stouts"],
+                images: ["ipa.jpg", "stout.jpg"]
+            },
+            {
+                text: "Are you more into hoppy, bitter IPAs or sour, funky Belgian-style beers?",
+                labels: ["Strongly Prefer Sour, Funky Belgians", "Strongly Prefer Bitter IPAs"],
+                images: ["belgian.jpg", "ipa2.jpg"]
+            },
+            {
+                text: "Do you enjoy complex, citrusy, possibly barrel-aged/sour beers, or do you prefer simpler, grain-forward lagers and ales?",
+                labels: ["Strongly Prefer Simple, Grain-Forward Beers", "Strongly Prefer Complex, Citrusy/Sour Beers"],
+                images: ["lager.jpg", "sour.jpg"]
+            },
+            {
+                text: "Do you lean towards lighter wheat or coffee notes in your beer, or richer, sweeter, malt-heavy styles like barleywines?",
+                labels: ["Strongly Prefer Sweeter Barleywine-Style Beers", "Strongly Prefer Lighter Wheat/Coffee Beers"],
+                images: ["barleywine.jpg", "wheat.jpg"]
+            },
+            {
+                text: "Do subtle barrel-aged and vanilla/oak flavors appeal to you more than spicy, Belgian-influenced or pumpkin-flavored beers?",
+                labels: ["Strongly Prefer Spicy/Belgian/Pumpkin Beers", "Strongly Prefer Barrel-Aged, Vanilla/Oak Notes"],
+                images: ["spicy.jpg", "barrel.jpg"]
+            },
+            {
+                text: "Are you more drawn to tart, funky, sour beers or to spicy, wheat-driven Belgian-style beers?",
+                labels: ["Strongly Prefer Spicy/Wheat-Driven Belgians", "Strongly Prefer Tart, Funky Sours"],
+                images: ["belgian2.jpg", "sour2.jpg"]
+            },
+            {
+                text: "Do you pay close attention to subtle mouthfeel and aroma details, or do you mainly care about straightforward, recognizable beer styles and flavors?",
+                labels: ["Strongly Prefer Straightforward Style/Flavor", "Strongly Prefer Subtle Mouthfeel/Aroma Nuances"],
+                images: ["aroma.jpg", "flavor.jpg"]
+            }
+        ];
+
+        const resultImages = {
+            0: "assets/img/beer_images/C0_LightAndRefreshingLagers.png",
+            1: "assets/img/beer_images/C1_DarkAndStrongAles.png",
+            2: "assets/img/beer_images/C2_Hop-ForwardIPA.png",
+            3: "assets/img/beer_images/C3_RichandRoastyStouts.png",
+            4: "assets/img/beer_images/C4_BelgianandWheatStyles.png",
+            5: "assets/img/beer_images/C5_MaltyandBalancedAles.png",
+            6: "assets/img/beer_images/C6_CritrusyAndBalancedIPAs.png",
+            7: "assets/img/beer_images/C7_SourandExperimentalBeers.png",
+            8: "assets/img/beer_images/C8_SpecialtyandNicheStyles.png"
+        };
+
+        const clusterDescription = {
+            0: {
+                title: "Light and Refreshing Lagers",
+                description: "You’re all about easygoing vibes and a crisp, clean finish. Light lagers match your preference for simplicity and thirst-quenching satisfaction. These beers are your ideal companion for sunny days, barbecues, and casual hangouts, offering a light, refreshing sip that keeps you cool and carefree."
+            },
+            1: {
+                title: "Dark and Strong Ales",
+                description: "Bold and complex, dark ales align with your taste for rich flavors and a touch of warmth. These beers wrap you in comforting notes of roasted malt, caramel, and a higher alcohol kick—perfect for sipping by the fire or during cozy winter nights. You appreciate a beer that feels like an experience in itself."
+            },
+            2: {
+                title: "Hop-Forward IPAs",
+                description: "You’re adventurous, bold, and not afraid of a little intensity. Hop-forward IPAs bring vibrant bitterness, resinous pine, and floral or tropical bursts to the forefront, making every sip an exciting journey. Whether you’re a craft beer connoisseur or simply someone who loves a bit of bite, IPAs match your dynamic personality year-round."
+            },
+            3: {
+                title: "Rich and Roasty Stouts",
+                description: "Smooth, dark, and deeply satisfying, stouts resonate with your love for comfort and indulgence. Their velvety texture and flavors of coffee, chocolate, and roasted malt make them the perfect choice for colder months or whenever you’re in the mood for something bold and luxurious."
+            },
+            4: {
+                title: "Belgian and Wheat Styles",
+                description: "Your preference for fruity, light, and slightly sweet beers matches the vibrant and refreshing nature of Belgian and wheat styles. With their zesty citrus, hints of spice, and fluffy textures, these beers bring a little sunshine to your glass, perfect for spring picnics or summer evenings."
+            },
+            5: {
+                title: "Malty and Balanced Ales",
+                description: "You love harmony and warmth, which is exactly what malty ales deliver. With a smooth, toasty backbone and a hint of sweetness, these beers are your go-to for fall and winter. Their balanced flavor profile matches your preference for something steady and comforting."
+            },
+            6: {
+                title: "Citrusy and Balanced IPAs",
+                description: "Bright and zesty, you gravitate towards beers that pack a punch of citrus and a well-rounded finish. Citrusy IPAs bring tropical vibes and a juicy character to your palate, making them your perfect companion for warm-weather adventures and lively get-togethers."
+            },
+            7: {
+                title: "Sour and Experimental Beers",
+                description: "You love surprises and thrive on bold, unique experiences. Sour beers, with their tart, tangy kick and innovative flavor combinations, are a match for your curious and adventurous spirit. Whether it’s a fruity Berliner Weisse or a barrel-aged wild ale, you enjoy the unexpected."
+            },
+            8: {
+                title: "Specialty and Niche Styles",
+                description: "You have a taste for the rare and unconventional, enjoying beers that push boundaries and tell a story. Specialty and niche styles reflect your love for variety, creativity, and seasonal delights. Whether brewed for a festival or inspired by a unique tradition, these beers always keep things interesting."
+            }
+        }
+
         const dimensionWeights = [0.14921, 0.16139, 0.10864, 0.09752, 0.09448, 0.08142, 0.07865, 0.07282];
         const clusterMeans = {
             0: [0.249053, -0.080032, -0.017682, -0.069967, 0.038991, 0.061582, 0.005178, 0.000579],
@@ -70,47 +294,82 @@
             7: [0.227468, -0.026946, -0.146283, 0.101795, -0.000715, 0.010981, 0.133357, 0.003663],
             8: [0.237599, -0.054014, -0.056930, -0.032819, 0.018249, 0.008775, -0.022155, 0.006228]
         };
-        const clusters = Object.keys(clusterMeans).map(Number);
-        const meanVectors = Object.values(clusterMeans);
 
-        // Compute means and stds
-        const pcMean = meanVectors[0].map((_, colIndex) =>
-            meanVectors.reduce((sum, row) => sum + row[colIndex], 0) / meanVectors.length
-        );
+        const userVector = Array(questions.length).fill(0);
+        let currentQuestion = 0;
 
-        const pcStd = meanVectors[0].map((_, colIndex) => {
-            const variance = meanVectors.reduce((sum, row) =>
-                sum + Math.pow(row[colIndex] - pcMean[colIndex], 2), 0) / (meanVectors.length - 1);
-            return Math.sqrt(variance) || 1.0;
-        });
+        const questionText = document.getElementById("question");
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
+        const progress = document.getElementById("progress");
+        const clusterResult = document.getElementById("cluster-result");
+        const buttons = document.querySelectorAll('#button-group button');
+        // const selectedValueSpan = document.getElementById('selected-value');
 
-        // Update slider values
-        const sliders = Array.from(document.querySelectorAll("input[type='range']"));
-        sliders.forEach(slider => {
-            slider.addEventListener("input", () => {
-                document.getElementById(`${slider.id}-value`).textContent = slider.value;
+        const updateProgress = () => {
+            progress.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+        };
+
+        const updateQuestion = () => {
+            const question = questions[currentQuestion];
+            questionText.textContent = question.text;
+            document.getElementById("slider-label-left").textContent = question.labels[0];
+            document.getElementById("slider-label-right").textContent = question.labels[1];
+
+            // Reset button selection
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            const currentValue = userVector[currentQuestion];
+            const selectedButton = document.querySelector(`button[data-value="${currentValue}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('selected');
+            }
+            // selectedValueSpan.textContent = currentValue;
+
+            prevButton.disabled = currentQuestion === 0;
+            nextButton.textContent = currentQuestion === questions.length - 1 ? "Finish" : "Next";
+            updateProgress();
+        };
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                const value = parseFloat(button.dataset.value);
+                // selectedValueSpan.textContent = value;
+                userVector[currentQuestion] = value;
             });
         });
 
-        // Calculate and display result
-        document.getElementById("submit-button").addEventListener("click", () => {
-            const userVector = sliders.map(slider => parseFloat(slider.value));
-            const standardizedMeanVectors = meanVectors.map(row => row.map((value, index) =>
-                (value - pcMean[index]) / pcStd[index]
-            ));
-            const weightedMeanVectors = standardizedMeanVectors.map(row =>
-                row.map((value, index) => value * dimensionWeights[index])
-            );
-            const weightedUserVector = userVector.map((value, index) =>
-                value * dimensionWeights[index]
-            );
-            const dists = weightedMeanVectors.map(row =>
-                Math.sqrt(row.reduce((sum, value, index) =>
-                    sum + Math.pow(value - weightedUserVector[index], 2), 0))
-            );
-            const closestCluster = clusters[dists.indexOf(Math.min(...dists))];
-            document.getElementById("result").textContent = `The user is closest to cluster: ${closestCluster}`;
+        prevButton.addEventListener("click", () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
         });
-    });
 
+        nextButton.addEventListener("click", () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateQuestion();
+            } else {
+                const distances = Object.values(clusterMeans).map((meanVector, index) => {
+                    return {
+                        index,
+                        distance: Math.sqrt(meanVector.reduce((sum, mean, i) =>
+                            sum + Math.pow((userVector[i] - mean), 2), 0))
+                    };
+                });
+
+                const closestCluster = distances.reduce((min, d) => d.distance < min.distance ? d : min).index;
+                clusterResult.textContent = closestCluster;
+                document.getElementById("result-image").src = resultImages[closestCluster];
+                document.getElementById("cluster-result").textContent = clusterDescription[closestCluster].title;
+                document.getElementById("cluster-description").textContent = clusterDescription[closestCluster].description;
+                document.getElementById("question-container").style.display = "none";
+                document.getElementById("result-container").style.display = "block";
+            }
+        });
+
+        updateQuestion();
+    });
 </script>

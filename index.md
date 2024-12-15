@@ -1,5 +1,6 @@
 ---
 ---
+{% include_relative assets/recommender/recommender.html%}
 <!--- Part 1
 
 {% include_relative assets/intro.html%}
@@ -23,4 +24,3 @@
 {% include_relative assets/community.html%}
 
 
-{% include_relative assets/recommender/recommender.html%}

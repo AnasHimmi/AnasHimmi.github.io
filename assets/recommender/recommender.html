@@ -30,7 +30,7 @@
 
     .progress-bar div {
         height: 100%;
-        background: #4CAF50;
+        background: #ffa500;
         width: 0;
         transition: width 0.3s;
     }
@@ -80,7 +80,7 @@
     }
 
     .buttons button.selected {
-        background: #4CAF50;
+        background: #ffa500;
         color: #fff;
     }
 
@@ -97,7 +97,7 @@
     .button-container button {
         padding: 10px 20px;
         border: none;
-        background: #4CAF50;
+        background: #ffa500;
         color: #fff;
         font-size: 1em;
         border-radius: 5px;
@@ -112,7 +112,7 @@
     }
 
     .button-container button:hover:not(:disabled) {
-        background: #45a049;
+        background: #ffa500;
     }
 
     .result {
@@ -160,13 +160,13 @@
         <div class="slider">
             <div class="slider-labels" id="slider-label-left">Famous/Specialty</div>
             <div class="buttons" id="button-group">
-                <button data-value="-2"></button>
-                <button data-value="-1.33"></button>
+                <button data-value="-1"></button>
                 <button data-value="-0.67"></button>
+                <button data-value="-0.33"></button>
                 <button data-value="0" class="selected"></button>
+                <button data-value="0.33"></button>
                 <button data-value="0.67"></button>
-                <button data-value="1.33"></button>
-                <button data-value="2"></button>
+                <button data-value="1"></button>
             </div>
             <div class="slider-labels" id="slider-label-right">General Profiles</div>
         </div>
@@ -188,46 +188,69 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        // const questions = [
+        //     {
+        //         text: "When choosing a beer, do you focus more on general flavor profiles (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?",
+        //         labels: ["Strongly Prefer Famous/Specialty", "Strongly Prefer General Flavor Profiles"],
+        //         images: ["specialty.jpg", "general.jpg"]
+        //     },
+        //     {
+        //         text: "Do you prefer rich, dark, roasted stouts and porters, or lighter, hoppy beers like IPAs?",
+        //         labels: ["Strongly Prefer Lighter, Hoppy Beers", "Strongly Prefer Dark, Roasted Stouts"],
+        //         images: ["ipa.jpg", "stout.jpg"]
+        //     },
+        //     {
+        //         text: "Are you more into hoppy, bitter IPAs or sour, funky Belgian-style beers?",
+        //         labels: ["Strongly Prefer Sour, Funky Belgians", "Strongly Prefer Bitter IPAs"],
+        //         images: ["belgian.jpg", "ipa2.jpg"]
+        //     },
+        //     {
+        //         text: "Do you enjoy complex, citrusy, possibly barrel-aged/sour beers, or do you prefer simpler, grain-forward lagers and ales?",
+        //         labels: ["Strongly Prefer Simple, Grain-Forward Beers", "Strongly Prefer Complex, Citrusy/Sour Beers"],
+        //         images: ["lager.jpg", "sour.jpg"]
+        //     },
+        //     {
+        //         text: "Do you lean towards lighter wheat or coffee notes in your beer, or richer, sweeter, malt-heavy styles like barleywines?",
+        //         labels: ["Strongly Prefer Sweeter Barleywine-Style Beers", "Strongly Prefer Lighter Wheat/Coffee Beers"],
+        //         images: ["barleywine.jpg", "wheat.jpg"]
+        //     },
+        //     {
+        //         text: "Do subtle barrel-aged and vanilla/oak flavors appeal to you more than spicy, Belgian-influenced or pumpkin-flavored beers?",
+        //         labels: ["Strongly Prefer Spicy/Belgian/Pumpkin Beers", "Strongly Prefer Barrel-Aged, Vanilla/Oak Notes"],
+        //         images: ["spicy.jpg", "barrel.jpg"]
+        //     },
+        //     {
+        //         text: "Are you more drawn to tart, funky, sour beers or to spicy, wheat-driven Belgian-style beers?",
+        //         labels: ["Strongly Prefer Spicy/Wheat-Driven Belgians", "Strongly Prefer Tart, Funky Sours"],
+        //         images: ["belgian2.jpg", "sour2.jpg"]
+        //     },
+        //     {
+        //         text: "Do you pay close attention to subtle mouthfeel and aroma details, or do you mainly care about straightforward, recognizable beer styles and flavors?",
+        //         labels: ["Strongly Prefer Straightforward Style/Flavor", "Strongly Prefer Subtle Mouthfeel/Aroma Nuances"],
+        //         images: ["aroma.jpg", "flavor.jpg"]
+        //     }
+        // ];
+
         const questions = [
             {
-                text: "When choosing a beer, do you focus more on general flavor profiles (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?",
-                labels: ["Strongly Prefer Famous/Specialty", "Strongly Prefer General Flavor Profiles"],
-                images: ["specialty.jpg", "general.jpg"]
+                text: "Do you prefer balanced beers with malt, citrus, and hop-forward flavors, or rich, complex beers with chocolate and coffee notes?",
+                labels: ["Strongly Prefer Rich and Complex Beers", "Strongly Prefer Balanced Beers"]
             },
             {
-                text: "Do you prefer rich, dark, roasted stouts and porters, or lighter, hoppy beers like IPAs?",
-                labels: ["Strongly Prefer Lighter, Hoppy Beers", "Strongly Prefer Dark, Roasted Stouts"],
-                images: ["ipa.jpg", "stout.jpg"]
+                text: "Do you enjoy dark beers with roasted flavors like chocolate and coffee, or light, refreshing beers with crisp citrus notes?",
+                labels: ["Strongly Prefer Light, Refreshing Beers", "Strongly Prefer Dark, Roasted Beers"]
             },
             {
-                text: "Are you more into hoppy, bitter IPAs or sour, funky Belgian-style beers?",
-                labels: ["Strongly Prefer Sour, Funky Belgians", "Strongly Prefer Bitter IPAs"],
-                images: ["belgian.jpg", "ipa2.jpg"]
+                text: "Do you prefer sour and tart beers with yeast-forward or fruity flavors, or hop-forward beers with pine, citrus, and bitterness?",
+                labels: ["Strongly Prefer Hop-Forward Beers", "Strongly Prefer Sour and Tart Beers"]
             },
             {
-                text: "Do you enjoy complex, citrusy, possibly barrel-aged/sour beers, or do you prefer simpler, grain-forward lagers and ales?",
-                labels: ["Strongly Prefer Simple, Grain-Forward Beers", "Strongly Prefer Complex, Citrusy/Sour Beers"],
-                images: ["lager.jpg", "sour.jpg"]
+                text: "Do you prefer beers with coffee and chocolate flavors, or sweet, malty beers with caramel and toffee notes?",
+                labels: ["Strongly Prefer Sweet and Malty Beers", "Strongly Prefer Coffee and Chocolate Beers"]
             },
             {
-                text: "Do you lean towards lighter wheat or coffee notes in your beer, or richer, sweeter, malt-heavy styles like barleywines?",
-                labels: ["Strongly Prefer Sweeter Barleywine-Style Beers", "Strongly Prefer Lighter Wheat/Coffee Beers"],
-                images: ["barleywine.jpg", "wheat.jpg"]
-            },
-            {
-                text: "Do subtle barrel-aged and vanilla/oak flavors appeal to you more than spicy, Belgian-influenced or pumpkin-flavored beers?",
-                labels: ["Strongly Prefer Spicy/Belgian/Pumpkin Beers", "Strongly Prefer Barrel-Aged, Vanilla/Oak Notes"],
-                images: ["spicy.jpg", "barrel.jpg"]
-            },
-            {
-                text: "Are you more drawn to tart, funky, sour beers or to spicy, wheat-driven Belgian-style beers?",
-                labels: ["Strongly Prefer Spicy/Wheat-Driven Belgians", "Strongly Prefer Tart, Funky Sours"],
-                images: ["belgian2.jpg", "sour2.jpg"]
-            },
-            {
-                text: "Do you pay close attention to subtle mouthfeel and aroma details, or do you mainly care about straightforward, recognizable beer styles and flavors?",
-                labels: ["Strongly Prefer Straightforward Style/Flavor", "Strongly Prefer Subtle Mouthfeel/Aroma Nuances"],
-                images: ["aroma.jpg", "flavor.jpg"]
+                text: "Do you prefer tart and fruity beers with barrel-aged or citrus flavors, or light, crisp beers like lagers and pilsners?",
+                labels: ["Strongly Prefer Light and Crisp Beers", "Strongly Prefer Tart and Fruity Beers"]
             }
         ];
 
@@ -282,18 +305,18 @@
             }
         }
 
-        const dimensionWeights = [0.14921, 0.16139, 0.10864, 0.09752, 0.09448, 0.08142, 0.07865, 0.07282];
         const clusterMeans = {
-            0: [0.249053, -0.080032, -0.017682, -0.069967, 0.038991, 0.061582, 0.005178, 0.000579],
-            1: [0.262984, 0.189522, -0.085679, 0.116146, -0.155535, 0.174491, -0.148607, 0.021532],
-            2: [0.379506, -0.149562, 0.128452, 0.065387, -0.018421, 0.000803, 0.000122, -0.005868],
-            3: [0.292106, 0.269329, 0.050015, 0.011941, 0.072518, -0.003838, 0.010615, -0.002157],
-            4: [0.263478, -0.082743, -0.103096, 0.029240, 0.074446, -0.061853, -0.069044, -0.006481],
-            5: [0.286028, 0.037230, -0.024730, -0.064091, -0.082715, -0.047946, 0.007292, 0.005726],
-            6: [0.162790, -0.032305, 0.010795, 0.005012, 0.005087, 0.005957, 0.000144, 0.014120],
-            7: [0.227468, -0.026946, -0.146283, 0.101795, -0.000715, 0.010981, 0.133357, 0.003663],
-            8: [0.237599, -0.054014, -0.056930, -0.032819, 0.018249, 0.008775, -0.022155, 0.006228]
-        };
+            0: [0.302240, -0.113818,  0.027190,  0.016874, -0.102487],
+            1: [0.272879,  0.239363,  0.078421, -0.042309,  0.074282],
+            2: [0.438018, -0.169051, -0.119701,  0.055911,  0.088201],
+            3: [0.294339,  0.333285, -0.010617,  0.127732, -0.020896],
+            4: [0.306248, -0.110408,  0.120383,  0.036100, -0.001810],
+            5: [0.330678,  0.091975, -0.033730, -0.135257, -0.010654],
+            6: [0.189145, -0.036239, -0.011842,  0.015151,  0.007993],
+            7: [0.247456, -0.020370,  0.238165, -0.046405,  0.121023],
+            8: [0.287911, -0.057828,  0.054868, -0.029566, -0.052702]
+            //      PC1        PC2         PC3       PC4        PC5
+        }
 
         const userVector = Array(questions.length).fill(0);
         let currentQuestion = 0;

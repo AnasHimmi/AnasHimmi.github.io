@@ -1,0 +1,325 @@
+
+<!--
+Valentin Schneeberger
+Part 1
+-->
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  header {
+    background: #ffa500;
+    color: #fff;
+    padding: 20px 10%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  .container {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffa500;
+  }
+  .container p {
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+  .highlight {
+    color: #ffa500;
+    font-weight: bold;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .container ul {
+    margin: 20px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+    color: #555;
+  }
+
+  .container ul li {
+    margin-bottom: 10px;
+  }
+
+  .container h3 {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #ffa500;
+  }
+
+  .container blockquote {
+    margin: 20px 0;
+    padding: 15px 20px;
+    background-color: #f5f5f5;
+    border-left: 5px solid #ffa500;
+    font-style: italic;
+    color: #555;
+  }
+  .container h4 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #ffa500;
+  }
+
+
+</style>
+
+<div class="container">
+  <h2>Introduction</h2>
+  <p>
+    <span class="highlight">Beeradvocate</span>, a renowned online beer rating platform, has entrusted us with building user communities to foster meaningful interactions. 
+    The goal is to create a space where users can share insights and experiences about the beers they try.
+  </p>
+  <p>
+    The main challenge lies in connecting individuals with similar beer preferences, as users with diverse tastes often struggle to find like-minded people to engage with.
+    Hence, our first goal is to find those communities.
+  </p>
+
+  <p>
+    To address this challenge, we successfully clustered a set of reviews from the platform, resulting in <span class="highlight">eight distinct clusters</span> with sufficiently different characteristics. 
+    This segmentation allows us to better group users based on their beer preferences, facilitating more meaningful exchanges and personalized recommendations.
+  </p>
+</div>
+
+<!--
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="assets/js/beerDataLoader.js"></script>
+<canvas id="flavorChart" width="800" height="600"></canvas>
+<script type="module">
+    import BeerDataLoader from './assets/js/beerDataLoader.js';
+    const dataLoader = new BeerDataLoader("./assets/data/BeerAdvocate", false);
+
+    // Sample data for cluster_reviews_df and other_reviews_df (simulating review data)
+  /*
+    const clusterReviewsT = [
+      { beer_id: 1, flavors: ['Citrus', 'Bitter', 'Pine'] },
+      { beer_id: 2, flavors: ['Citrus', 'Sweet', 'Bitter'] },
+      { beer_id: 3, flavors: ['Pine', 'Coffee', 'Bitter'] }
+    ];
+
+    const otherReviewsT = [
+      { beer_id: 4, flavors: ['Caramel', 'Chocolate', 'Sweet'] },
+      { beer_id: 5, flavors: ['Citrus', 'Coffee', 'Caramel'] },
+      { beer_id: 6, flavors: ['Chocolate', 'Bitter', 'Sweet'] }
+    ];
+
+    // Simulating ba_reviews_df (reviews data)
+    const baReviews = [
+      { beer_id: 1, flavors: ['Citrus', 'Bitter', 'Pine'] },
+      { beer_id: 2, flavors: ['Citrus', 'Sweet', 'Bitter'] },
+      { beer_id: 3, flavors: ['Pine', 'Coffee', 'Bitter'] },
+      { beer_id: 4, flavors: ['Caramel', 'Chocolate', 'Sweet'] },
+      { beer_id: 5, flavors: ['Citrus', 'Coffee', 'Caramel'] },
+      { beer_id: 6, flavors: ['Chocolate', 'Bitter', 'Sweet'] }
+    ];
+
+    // Simulating assigned_cluster (cluster assignment for reviews)
+    const assignedCluster = [
+      { beer_id: 1, cluster: 2 },
+      { beer_id: 2, cluster: 2 },
+      { beer_id: 3, cluster: 2 },
+      { beer_id: 4, cluster: 1 },
+      { beer_id: 5, cluster: 1 },
+      { beer_id: 6, cluster: 1 }
+    ];
+
+    
+    // Load all the data (reviews, ratings, etc.)
+    dataLoader.loadAllData().then(({ reviewsDf }) => {
+      console.log(reviewsDf);
+      // Map reviewsDf to the baReviews format
+      const baReviews = reviewsDf.map(review => {
+        return {
+          beer_id: parseInt(review.beer_id), // Make sure beer_id is an integer
+          flavors: [review.appearance, review.aroma, review.palate, review.taste, review.overall]
+            .filter(flavor => flavor) // Remove any null or empty flavor descriptors
+        };
+      });
+
+      // You can now use baReviews in the same format as your previous array
+      console.log(baReviews);
+    }).catch(err => {
+      console.error('Error loading data:', err);
+    });
+
+    // Define the cluster number (e.g., cluster 2)
+    const clusterNumber = 1;
+
+    // Filter cluster reviews: those whose beer_id are in cluster 2
+    const clusterReviews = baReviews.filter(review =>
+      assignedCluster.some(cluster => cluster.beer_id === review.beer_id && cluster.cluster === clusterNumber)
+    );
+
+    // Filter other reviews: those whose beer_id are not in cluster 2
+    const otherReviews = baReviews.filter(review =>
+      !assignedCluster.some(cluster => cluster.beer_id === review.beer_id && cluster.cluster === clusterNumber)
+    );
+    
+    */
+
+    async function loadReviews(filePath) {
+      try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${filePath}: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(`Error loading data from ${filePath}:`, error);
+        return [];
+      }
+    }
+
+    (async () => {
+      const clusterReviewsFile = './assets/cluster_reviews0.txt';
+      //const otherReviewsFile = './data/otherReviews.txt';
+
+      const clusterReviews = await loadReviews(clusterReviewsFile);
+      //const otherReviews = await loadReviews(otherReviewsFile);
+
+      console.log('Cluster Reviews:', clusterReviews);
+      //console.log('Other Reviews:', otherReviews);
+    })();
+
+
+    // Function to count occurrences of each flavor in a given dataset
+    function countFlavors(reviews) {
+      const flavorCounts = {};
+      reviews.forEach(review => {
+        review.flavors.forEach(flavor => {
+          if (flavorCounts[flavor]) {
+            flavorCounts[flavor]++;
+          } else {
+            flavorCounts[flavor] = 1;
+          }
+        });
+      });
+      return flavorCounts;
+    }
+
+    // Function to extract features and calculate the differences between clusters
+    function extractFeatures(clusterReviews, otherReviews) {
+      const clusterFlavorCounts = countFlavors(clusterReviews);
+      const otherFlavorCounts = countFlavors(otherReviews);
+      
+      // Combine the results into one feature comparison
+      const allFlavors = new Set([
+        ...Object.keys(clusterFlavorCounts),
+        ...Object.keys(otherFlavorCounts)
+      ]);
+      
+      const flavorComparison = Array.from(allFlavors).map(flavor => {
+        const clusterCount = clusterFlavorCounts[flavor] || 0;
+        const otherCount = otherFlavorCounts[flavor] || 0;
+        
+        return {
+          Appear: flavor,
+          Cluster: clusterCount,
+          Other: otherCount,
+          Difference: clusterCount - otherCount
+        };
+      });
+
+      return flavorComparison;
+    }
+
+    // Call the extractFeatures function
+    const flavorComparison = extractFeatures(clusterReviewsT, otherReviewsT);
+
+
+
+    // Sort by absolute value of 'Difference' (ascending)
+    const sortedFlavors = flavorComparison.sort((a, b) => Math.abs(a.Difference) - Math.abs(b.Difference));
+
+
+    // Prepare data for Chart.js
+    const labels = sortedFlavors.map(item => item.Appear);
+    const differences = sortedFlavors.map(item => item.Difference);
+
+    // Create Bar Chart
+    const ctx = document.getElementById('flavorChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Difference in Counts',
+          data: differences,
+          backgroundColor: differences.map(value => value > 0 ? 'rgba(54, 162, 235, 0.6)' : 'rgba(255, 99, 132, 0.6)'),
+          borderColor: differences.map(value => value > 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(255, 99, 132, 1)'),
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Difference in Flavor Descriptor Counts (IPA - Non-IPA)'
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Difference in Counts'
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Flavor Descriptor'
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+
+-->

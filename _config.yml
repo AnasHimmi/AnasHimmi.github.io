@@ -301,3 +301,7 @@ plugins:
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
 
+livereload:
+  enabled: true
+  port: 35729
+

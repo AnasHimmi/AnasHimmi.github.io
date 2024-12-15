@@ -1,0 +1,57 @@
+
+<!--
+Valentin Schneeberger
+Part 1.2.3
+-->
+<canvas id="flavorDifferenceChart" width="1000" height="2000"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const descriptors = [
+        "chocolate", "coffee", "vanilla", "sour", "yeast", "wheat", "sweet", 
+        "tart", "oak", "banana", "smoke", "fruit", "milk", "toffee", "grain", 
+        "nutty", "coriander", "spicy", "malty", "roasted", "clove", "earthy", 
+        "herbal", "caramel", "tropical", "floral", "hoppy", "bitter", "pine", "citrus"
+    ];
+    const differences = [
+        -36265, -27901, -22290, -17152, -12266, -11370, -10637, -9864, -9260, -8256, 
+        -7351, -6843, -5781, -4957, -3991, -3066, -2099, -1041, 852, 2872, 6813, 9315, 
+        10606, 11747, 15544, 17451, 23202, 25417, 28406, 39260
+    ];
+
+    const ctxFlavorDifferenceChart = document.getElementById('flavorDifferenceChart').getContext('2d');
+    new Chart(ctxFlavorDifferenceChart, {
+        type: 'bar',
+        data: {
+            labels: descriptors,
+            datasets: [{
+                label: 'Difference in Counts (IPA - Non-IPA)',
+                data: differences,
+                backgroundColor: differences.map(value => value < 0 ? 'rgba(54, 162, 235, 0.7)' : 'rgba(255, 99, 132, 0.7)'),
+                borderColor: differences.map(value => value < 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(255, 99, 132, 1)'),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Difference in Flavor Descriptor Counts (IPA - Non-IPA)' }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Difference in Counts' },
+                    beginAtZero: true
+                },
+                y: {
+                    title: { display: true, text: 'Flavor Descriptor' },
+                    ticks: {
+                        maxRotation: 90, 
+                        minRotation: 45
+                    }
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,55 @@
+<!--
+Valentin Schneeberger
+Part 1.1.6
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="beerClusterChart" width="800" height="400"></canvas>
+<script>
+    // Data for clusters
+    const clusters = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // Cluster numbers
+    const beerCounts = [22000, 5000, 20000, 18000, 16000, 25000, 19000, 10000, 2000]; // Beer counts
+
+    // Chart configuration
+    const ctxBeerClusterChart = document.getElementById('beerClusterChart').getContext('2d');
+    new Chart(ctxBeerClusterChart, {
+        type: 'bar',
+        data: {
+            labels: clusters, // Cluster numbers
+            datasets: [{
+                label: 'Number of Beers',
+                data: beerCounts, // Beer counts
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Number of Beers in Each Cluster'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Cluster'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Number of Beers'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

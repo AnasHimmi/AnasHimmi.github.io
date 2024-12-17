@@ -1,0 +1,198 @@
+
+<!--
+Valentin Schneeberger
+Part 1.1.6
+-->
+
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+  }
+
+  #cluster-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+  }
+
+  .cluster {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 20px;
+      transition: transform 0.2s ease-in-out;
+  }
+
+  .cluster:hover {
+      transform: translateY(-5px);
+  }
+
+  .cluster-title {
+      font-weight: bold;
+      font-size: 20px;
+      color: #0056b3;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+  }
+
+  .beer-item {
+      font-size: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #555;
+  }
+
+  .beer-item:last-child {
+      border-bottom: none;
+  }
+
+  .beer-item span {
+      font-weight: bold;
+      color: #222;
+  }
+
+  .intro-section {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .intro-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0056b3;
+      margin-bottom: 10px;
+  }
+
+  .intro-text {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+  }
+
+  .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+  }
+
+  .image-gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .image-gallery img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .image-caption {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #555;
+      font-weight: bold;
+  }
+
+  .gallery-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #0056b3;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .gallery-subtitle {
+        text-align: center;
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+
+</style>
+
+<div class="intro-section">
+  <div class="intro-title">Cluster 0 Overview</div>
+</div>
+
+<div class="image-gallery">
+  <div>
+    <img src="../assets/img/clusters/cluster0.webp" />
+  </div>
+</div>
+
+<div id="cluster-container"></div>
+
+<script>
+  const clusterData = {
+      0: [
+          { name: "Prima Pils", reviews: 2105.0 },
+          { name: "Pabst Blue Ribbon (PBR)", reviews: 1724.0 },
+          { name: "#9", reviews: 1703.0 },
+          { name: "Budweiser", reviews: 1683.0 },
+          { name: "Sierra Nevada Summerfest", reviews: 1605.0 }
+      ],
+  };
+
+  function displayClusters(clusters) {
+      const container = document.getElementById("cluster-container");
+      container.innerHTML = "";
+
+      for (const [cluster, beers] of Object.entries(clusters)) {
+          const clusterDiv = document.createElement("div");
+          clusterDiv.classList.add("cluster");
+
+          beers.forEach(beer => {
+              const beerItem = document.createElement("div");
+              beerItem.classList.add("beer-item");
+              beerItem.innerHTML = `<span>${beer.name}</span> - ${beer.reviews} reviews`;
+              clusterDiv.appendChild(beerItem);
+          });
+
+          container.appendChild(clusterDiv);
+      }
+  }
+
+  displayClusters(clusterData);
+</script>
+
+<div class="container">
+
+  
+
+
+  <div class="gallery-title">Word Clouds</div>
+
+
+  <div class="image-gallery">
+    <div>
+      <img src="../assets/img/clusters/cluster0_words.png" alt="Cluster 0 Words" />
+    </div>
+  </div>
+
+  <div class="gallery-title">Emotions</div>
+
+  <div class="image-gallery">
+    <div>
+      <img src="../assets/img/emotions/emotions_cluster_0.png" />
+    </div>
+  </div>
+
+
+
+</div>

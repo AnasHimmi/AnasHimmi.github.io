@@ -2,10 +2,60 @@
 Valentin Schneeberger
 Part 1.2.2
 -->
+<style>
+  .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+  }
+
+  .image-gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .image-gallery img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .image-caption {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #555;
+      font-weight: bold;
+  }
+
+  .gallery-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #0056b3;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .gallery-subtitle {
+        text-align: center;
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+
+</style>
+
+
 <div class="container">
   <h3>Cluster Characterization</h3>
   <p>
-    With our clusters established, <span class="highlight">Beeradvocate</span> requested a detailed characterization of each one. Specifically, they want:
+    With our clusters established, <span class="highlight">BeerAdvocate</span> requested a detailed characterization of each one. Specifically, they want:
   </p>
   <ul>
     <li><strong>Main Beer Styles:</strong> Identifying the dominant beer styles in each cluster.</li>
@@ -14,14 +64,48 @@ Part 1.2.2
   <p>
     These characteristics will help users find communities that align with their preferences. For example, an American Stout enthusiast might be curious about the distinct flavors that define this style, such as coffee and chocolate notes with dark/black color. They may also want to discover other beer styles with similar profiles, enhancing their exploration and engagement within the platform.
   </p>
-  <img src="assets/img/clusters/cluster0_words.png" />
-  <img src="assets/img/clusters/cluster1_words.png" />
-  <img src="assets/img/clusters/cluster2_words.png" />
-  <img src="assets/img/clusters/cluster3_words.png" />
-  <img src="assets/img/clusters/cluster4_words.png" />
-  <img src="assets/img/clusters/cluster5_words.png" />
-  <img src="assets/img/clusters/cluster6_words.png" />
-  <img src="assets/img/clusters/cluster7_words.png" />
-  <img src="assets/img/clusters/cluster8_words.png" />
+
+  <div class="gallery-title">Word Clouds Per Cluster</div>
+  <div class="gallery-subtitle">Explore the most frequent words associated with each beer cluster</div>
+
+
+  <div class="image-gallery">
+    <div>
+      <div class="image-caption">Cluster 0</div>
+      <img src="assets/img/clusters/cluster0_words.png" alt="Cluster 0 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 1</div>
+      <img src="assets/img/clusters/cluster1_words.png" alt="Cluster 1 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 2</div>
+      <img src="assets/img/clusters/cluster2_words.png" alt="Cluster 2 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 3</div>
+      <img src="assets/img/clusters/cluster3_words.png" alt="Cluster 3 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 4</div>
+      <img src="assets/img/clusters/cluster4_words.png" alt="Cluster 4 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 5</div>
+      <img src="assets/img/clusters/cluster5_words.png" alt="Cluster 5 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 6</div>
+      <img src="assets/img/clusters/cluster6_words.png" alt="Cluster 6 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 7</div>
+      <img src="assets/img/clusters/cluster7_words.png" alt="Cluster 7 Words" />
+    </div>
+    <div>
+      <div class="image-caption">Cluster 8</div>
+      <img src="assets/img/clusters/cluster8_words.png" alt="Cluster 8 Words" />
+    </div>
+  </div>
 
 </div>

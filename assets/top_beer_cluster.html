@@ -5,22 +5,90 @@ Part 1.1.6
 -->
 
 <style>
-    .cluster {
-        margin-bottom: 20px;
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+        color: #333;
     }
+
+    #cluster-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .cluster {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .cluster:hover {
+        transform: translateY(-5px);
+    }
+
     .cluster-title {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
+        color: #0056b3;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+    }
+
+    .beer-item {
+        font-size: 16px;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+        color: #555;
+    }
+
+    .beer-item:last-child {
+        border-bottom: none;
+    }
+
+    .beer-item span {
+        font-weight: bold;
+        color: #222;
+    }
+
+    .intro-section {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .intro-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #0056b3;
         margin-bottom: 10px;
     }
-    .beer-item {
-        margin-left: 20px;
+
+    .intro-text {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
     }
+
 </style>
+
+<div class="intro-section">
+    <div class="intro-title">Beer Clusters Overview</div>
+</div>
+
+
+
 <div id="cluster-container"></div>
 
 <script>
-    // Cluster data
     const clusterData = {
         0: [
             { name: "Prima Pils", reviews: 2105.0 },
@@ -44,11 +112,11 @@ Part 1.1.6
             { name: "Sierra Nevada Celebration Ale", reviews: 3466.0 }
         ],
         3: [
-          { name: "Founders Breakfast Stout", reviews: 3811.0 },
-          { name: "Old Rasputin Russian Imperial Stout", reviews: 3722.0 },
-          { name: "Brooklyn Black Chocolate Stout", reviews: 2810.0 },
-          { name: "Stone Imperial Russian Stout", reviews: 2754.0 },
-          { name: "Storm King Stout", reviews: 2642.0 }
+            { name: "Founders Breakfast Stout", reviews: 3811.0 },
+            { name: "Old Rasputin Russian Imperial Stout", reviews: 3722.0 },
+            { name: "Brooklyn Black Chocolate Stout", reviews: 2810.0 },
+            { name: "Stone Imperial Russian Stout", reviews: 2754.0 },
+            { name: "Storm King Stout", reviews: 2642.0 }
         ],
         4: [
             { name: "La Fin Du Monde", reviews: 2976.0 },
@@ -85,40 +153,32 @@ Part 1.1.6
             { name: "Samuel Adams Honey Porter", reviews: 635.0 },
             { name: "Chateau Jiahu", reviews: 569.0 }
         ]
-
-
-        
-        // Add other clusters as needed
     };
 
-    // Function to display cluster data
     function displayClusters(clusters) {
         const container = document.getElementById("cluster-container");
+        container.innerHTML = "";
 
         for (const [cluster, beers] of Object.entries(clusters)) {
-            // Create a cluster section
             const clusterDiv = document.createElement("div");
             clusterDiv.classList.add("cluster");
 
-            // Add cluster title
             const title = document.createElement("div");
             title.classList.add("cluster-title");
-            title.textContent = `Cluster ${cluster}:`;
+            title.textContent = `Cluster ${cluster}`;
             clusterDiv.appendChild(title);
 
-            // Add beers for the cluster
             beers.forEach(beer => {
                 const beerItem = document.createElement("div");
                 beerItem.classList.add("beer-item");
-                beerItem.textContent = `${beer.name} - ${beer.reviews} reviews`;
+                beerItem.innerHTML = `<span>${beer.name}</span> - ${beer.reviews} reviews`;
                 clusterDiv.appendChild(beerItem);
             });
 
-            // Append cluster section to container
             container.appendChild(clusterDiv);
         }
     }
 
-    // Display clusters on the page
     displayClusters(clusterData);
 </script>
+

@@ -383,7 +383,10 @@
                     };
                 });
 
+                
                 const closestCluster = distances.reduce((min, d) => d.distance < min.distance ? d : min).index;
+                console.log("the cluster is " + closestCluster)
+                window.location.href = "/cluster" + closestCluster;
                 clusterResult.textContent = closestCluster;
                 document.getElementById("result-image").src = resultImages[closestCluster];
                 document.getElementById("cluster-result").textContent = clusterDescription[closestCluster].title;

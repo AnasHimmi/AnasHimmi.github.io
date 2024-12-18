@@ -170,14 +170,12 @@
             </div>
             <div class="slider-labels" id="slider-label-right">General Profiles</div>
         </div>
-        <!-- <div>Selected Value: <span id="selected-value">0</span></div> -->
         <div class="button-container">
             <button id="prev-button" disabled>Previous</button>
             <button id="next-button">Next</button>
         </div>
     </div>
-    <div class="result" id="result-container"
-        style="display: none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="result" id="result-container" style="display: none;">
         <h2 style="font-size: 2rem; color: #333; margin-bottom: 20px;">Your Beer Preference:</h2>
         <h3 id="cluster-result" style="font-size: 1.5rem; color: #555; margin-bottom: 20px; font-weight: 600;">Cluster
             Title</h3>
@@ -188,6 +186,7 @@
         </p>
         <img id="result-image" src="" alt="Cluster Image"
             style="width: 80%; max-width: 400px; margin-top: 20px; border-radius: 8px; border: 1px solid #ddd;">
+        <button id="view-results-button" style="display: none;">View Full Results</button>
     </div>
 </div>
 
@@ -419,7 +418,7 @@
                     document.getElementById("result-container").appendChild(viewResultsButton);
 
                     viewResultsButton.addEventListener("click", () => {
-                        window.location.href = "cluster" + closestCluster + ".html";
+                        window.location.href = "cluster" + closestCluster;
                     });
                 };
             }

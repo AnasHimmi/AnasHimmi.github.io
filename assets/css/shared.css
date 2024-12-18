@@ -6,6 +6,8 @@ body {
   color: #333;
 }
 
+
+
 #cluster-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -115,4 +117,94 @@ body {
 
 .comparison-right {
   float: right;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+header {
+  background: #0056b3;
+  color: #fff;
+  padding: 20px 10%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+.container {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #0056b3;
+}
+.container p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+.highlight {
+  color: #0056b3;
+  font-weight: bold;
+}
+img {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.container ul {
+  margin: 20px 0;
+  padding-left: 20px;
+  list-style-type: disc;
+  color: #555;
+}
+
+.container ul li {
+  margin-bottom: 10px;
+}
+
+.container h3 {
+  font-size: 1.3rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #0056b3;
+}
+
+.container blockquote {
+  margin: 20px 0;
+  padding: 15px 20px;
+  background-color: #f5f5f5;
+  border-left: 5px solid #0056b3;
+  font-style: italic;
+  color: #555;
+}
+
+
+h4 {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #0056b3;
 }

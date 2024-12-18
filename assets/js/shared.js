@@ -1,4 +1,4 @@
-const clusters = {
+const clustersData = {
   0: [
     { name: "Prima Pils", reviews: 2105.0 },
     { name: "Pabst Blue Ribbon (PBR)", reviews: 1724.0 },
@@ -71,7 +71,7 @@ function displayClusters(id) {
   const clusterDiv = document.createElement("div");
   clusterDiv.classList.add("cluster");
   
-  const beers = clusters[id];
+  const beers = clustersData[id];
   beers.forEach(beer => {
       const beerItem = document.createElement("div");
       beerItem.classList.add("beer-item");

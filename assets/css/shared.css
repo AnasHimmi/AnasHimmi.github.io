@@ -96,3 +96,23 @@ body {
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
+
+.comparison-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.comparison-left, .comparison-right {
+  width: 50%;
+  min-height: 100vh; /* Ensures that the containers stretch the full height of the screen */
+  position: relative;
+}
+
+.comparison-left {
+  float: left;
+}
+
+.comparison-right {
+  float: right;
+}

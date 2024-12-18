@@ -5,10 +5,12 @@
 
 {% include_relative assets/intro.html%}
 {% include_relative assets/beer_per_cluster.html%}
-{% include_relative assets/top_beer_cluster.html%}
 {% include_relative assets/cluster_characteristic.html%}
 {% include_relative assets/link_cluster2_ipa.html%}
-{% include_relative assets/ipa_vs_non_ipa.html%}
+{% include_relative assets/interactive_flavor_comparison.html %}
+{% include_relative assets/interactive_flavor_comparison2.html %}
+{% include_relative assets/cluster2_ipa_conclusion.html%}
+
 {% include_relative assets/abv_text.html%}
 {% include_relative assets/abv_distribution.html%}
 {% include_relative assets/seasonal_distribution.html%}

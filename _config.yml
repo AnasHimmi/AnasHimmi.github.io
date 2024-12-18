@@ -19,8 +19,17 @@ author: valentin.schneeberger@epfl.ch, daniel.lopezgala@epfl.ch, arnault.stahli@
 # --- List of links in the navigation bar --- #
 ###############################################
 
-# navbar-links:
-#   About Me: "aboutme"
+navbar-links:
+  Cluster 0: "cluster0"
+  Cluster 1: "cluster1"
+  Cluster 2: "cluster2"
+  Cluster 3: "cluster3"
+  Cluster 4: "cluster4"
+  Cluster 5: "cluster5"
+  Cluster 6: "cluster6"
+  Cluster 7: "cluster7"
+  Cluster 8: "cluster8"
+  
 #   Resources:
 #     - Beautiful Jekyll: "https://beautifuljekyll.com"
 #     - Learn markdown: "https://www.markdowntutorial.com/"

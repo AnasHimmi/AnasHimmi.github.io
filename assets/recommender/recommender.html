@@ -375,6 +375,7 @@
                 currentQuestion++;
                 updateQuestion();
             } else {
+                // Calculate distances to clusters
                 const distances = Object.values(clusterMeans).map((meanVector, index) => {
                     return {
                         index,
@@ -383,16 +384,34 @@
                     };
                 });
 
-                
                 const closestCluster = distances.reduce((min, d) => d.distance < min.distance ? d : min).index;
-                console.log("the cluster is " + closestCluster)
-                window.location.href = "/cluster" + closestCluster;
+
+                // Update the UI to show results and let the user navigate manually
                 clusterResult.textContent = closestCluster;
                 document.getElementById("result-image").src = resultImages[closestCluster];
                 document.getElementById("cluster-result").textContent = clusterDescription[closestCluster].title;
                 document.getElementById("cluster-description").textContent = clusterDescription[closestCluster].description;
                 document.getElementById("question-container").style.display = "none";
                 document.getElementById("result-container").style.display = "block";
+
+                // Show "View Results" button
+                const viewResultsButton = document.createElement("button");
+                viewResultsButton.textContent = "View Full Results";
+                viewResultsButton.id = "view-results-button";
+                viewResultsButton.style.padding = "10px 20px";
+                viewResultsButton.style.border = "none";
+                viewResultsButton.style.background = "#0056b3";
+                viewResultsButton.style.color = "#fff";
+                viewResultsButton.style.fontSize = "1em";
+                viewResultsButton.style.borderRadius = "5px";
+                viewResultsButton.style.cursor = "pointer";
+                viewResultsButton.style.width = "auto";
+                viewResultsButton.style.marginTop = "20px";
+                document.getElementById("result-container").appendChild(viewResultsButton);
+
+                viewResultsButton.addEventListener("click", () => {
+                    window.location.href = "DataCrusadas/cluster" + closestCluster;
+                });
             }
         });
 

@@ -15,10 +15,14 @@
 {% include_relative assets/abv_distribution_by_cluster_interactive.html%}
 {% include_relative assets/distribution_of_brewery_sizes_based_on_nbr_beers_interactive.html%}
 {% include_relative assets/ratings_by_cluster_and_month_interactive.html%}
+
 {% include_relative assets/average_rating.html%}
+{% include_relative assets/distribution_histogram_of_rating_interactive.html%}
+
 {% include_relative assets/temporal_evolution.html%}
+
 {% include_relative assets/world_distribution.html%}
-{% include_relative assets/abv_density_chart.html%}
+{% include_relative assets/ratings_by_cluster_and_year_interactive.html%}
 {% include_relative assets/favourite_breweries_text.html%}
 
 

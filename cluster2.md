@@ -1,7 +1,7 @@
 ---
 layout: home
-permalink: /cluster0/
-cluster_id: 0
+permalink: /cluster2/
+cluster_id: 2
 ---
 
 {% include_relative _includes/cluster_template.html %}

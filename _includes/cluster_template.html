@@ -1,0 +1,40 @@
+
+<script>
+  console.log({{page.cluster_id}})
+  document.addEventListener("DOMContentLoaded", () => {
+      displayClusters({{page.cluster_id}});
+  });
+  </script>
+  
+
+<div class="intro-section">
+  <div class="intro-title">Cluster {{ page.cluster_id }}</div>
+</div>
+
+<div class="image-gallery">
+  <div>
+      <img src="../assets/img/clusters/cluster{{ page.cluster_id }}.webp" />
+  </div>
+</div>
+
+<div class="intro-section">
+  <div class="intro-title">Top Beers</div>
+</div>
+
+<div id="cluster-container"></div>
+
+<div class="container">
+  <div class="gallery-title">Word Clouds</div>
+  <div class="image-gallery">
+      <div>
+          <img src="../assets/img/clusters/cluster{{ page.cluster_id }}_words.png" alt="Cluster {{ cluster_id }} Words" />
+      </div>
+  </div>
+
+  <div class="gallery-title">Emotions</div>
+  <div class="image-gallery">
+      <div>
+          <img src="../assets/img/emotions/emotions_cluster_{{ page.cluster_id }}.png" />
+      </div>
+  </div>
+</div>

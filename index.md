@@ -12,9 +12,9 @@
 {% include_relative assets/cluster2_ipa_conclusion.html%}
 
 {% include_relative assets/abv_text.html%}
-{% include_relative assets/abv_distribution.html%}
-{% include_relative assets/seasonal_distribution.html%}
-{% include_relative assets/breweries_distribution.html%}
+{% include_relative assets/abv_distribution_by_cluster_interactive.html%}
+{% include_relative assets/distribution_of_brewery_sizes_based_on_nbr_beers_interactive.html%}
+{% include_relative assets/ratings_by_cluster_and_month_interactive.html%}
 {% include_relative assets/average_rating.html%}
 {% include_relative assets/temporal_evolution.html%}
 {% include_relative assets/world_distribution.html%}

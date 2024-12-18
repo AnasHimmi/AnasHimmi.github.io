@@ -154,7 +154,7 @@
     </div>
     <div class="content" id="question-container">
         <h2 id="question">
-            When choosing a beer, do you focus more on general flavor profiles 
+            When choosing a beer, do you focus more on general flavor profiles
             (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?
         </h2>
         <div class="slider">
@@ -176,13 +176,18 @@
             <button id="next-button">Next</button>
         </div>
     </div>
-    <div class="result" id="result-container" style="display: none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="result" id="result-container"
+        style="display: none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <h2 style="font-size: 2rem; color: #333; margin-bottom: 20px;">Your Beer Preference:</h2>
-        <h3 id="cluster-result" style="font-size: 1.5rem; color: #555; margin-bottom: 20px; font-weight: 600;">Cluster Title</h3>
-        <p id="cluster-description" style="font-size: 1rem; line-height: 1.6; color: #666; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Description of the beer cluster goes here. This text will provide insights into the type of beer that matches your preferences, making your choice more personalized and enjoyable.
+        <h3 id="cluster-result" style="font-size: 1.5rem; color: #555; margin-bottom: 20px; font-weight: 600;">Cluster
+            Title</h3>
+        <p id="cluster-description"
+            style="font-size: 1rem; line-height: 1.6; color: #666; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Description of the beer cluster goes here. This text will provide insights into the type of beer that
+            matches your preferences, making your choice more personalized and enjoyable.
         </p>
-        <img id="result-image" src="" alt="Cluster Image" style="width: 80%; max-width: 400px; margin-top: 20px; border-radius: 8px; border: 1px solid #ddd;">
+        <img id="result-image" src="" alt="Cluster Image"
+            style="width: 80%; max-width: 400px; margin-top: 20px; border-radius: 8px; border: 1px solid #ddd;">
     </div>
 </div>
 
@@ -306,15 +311,15 @@
         }
 
         const clusterMeans = {
-            0: [0.302240, -0.113818,  0.027190,  0.016874, -0.102487],
-            1: [0.272879,  0.239363,  0.078421, -0.042309,  0.074282],
-            2: [0.438018, -0.169051, -0.119701,  0.055911,  0.088201],
-            3: [0.294339,  0.333285, -0.010617,  0.127732, -0.020896],
-            4: [0.306248, -0.110408,  0.120383,  0.036100, -0.001810],
-            5: [0.330678,  0.091975, -0.033730, -0.135257, -0.010654],
-            6: [0.189145, -0.036239, -0.011842,  0.015151,  0.007993],
-            7: [0.247456, -0.020370,  0.238165, -0.046405,  0.121023],
-            8: [0.287911, -0.057828,  0.054868, -0.029566, -0.052702]
+            0: [0.302240, -0.113818, 0.027190, 0.016874, -0.102487],
+            1: [0.272879, 0.239363, 0.078421, -0.042309, 0.074282],
+            2: [0.438018, -0.169051, -0.119701, 0.055911, 0.088201],
+            3: [0.294339, 0.333285, -0.010617, 0.127732, -0.020896],
+            4: [0.306248, -0.110408, 0.120383, 0.036100, -0.001810],
+            5: [0.330678, 0.091975, -0.033730, -0.135257, -0.010654],
+            6: [0.189145, -0.036239, -0.011842, 0.015151, 0.007993],
+            7: [0.247456, -0.020370, 0.238165, -0.046405, 0.121023],
+            8: [0.287911, -0.057828, 0.054868, -0.029566, -0.052702]
             //      PC1        PC2         PC3       PC4        PC5
         }
 
@@ -392,11 +397,11 @@
                 document.getElementById("result-container").style.display = "block";
                 document.getElementById("cluster-result").textContent = clusterDescription[closestCluster].title;
                 document.getElementById("cluster-description").textContent = clusterDescription[closestCluster].description;
-                
+
                 // Set image and create view results button after image
                 const resultImage = document.getElementById("result-image");
                 resultImage.src = resultImages[closestCluster];
-                
+
                 // Create and style button after image loads
                 resultImage.onload = () => {
                     const viewResultsButton = document.createElement("button");
@@ -414,7 +419,7 @@
                     document.getElementById("result-container").appendChild(viewResultsButton);
 
                     viewResultsButton.addEventListener("click", () => {
-                        window.location.href = "/DataCrusadas/cluster" + closestCluster;
+                        window.location.href = "cluster" + closestCluster + ".html";
                     });
                 };
             }

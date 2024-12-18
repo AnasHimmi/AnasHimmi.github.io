@@ -154,11 +154,10 @@
     </div>
     <div class="content" id="question-container">
         <h2 id="question">
-            When choosing a beer, do you focus more on general flavor profiles
-            (citrus, chocolate, coffee) or do you seek out famous, specialty, or seasonal releases?
+            Do you prefer balanced beers with malt, citrus, and hop-forward flavors, or rich, complex beers with chocolate and coffee notes?
         </h2>
         <div class="slider">
-            <div class="slider-labels" id="slider-label-left">Famous/Specialty</div>
+            <div class="slider-labels" id="slider-label-left">"Strongly Prefer Rich and Complex Beers"</div>
             <div class="buttons" id="button-group">
                 <button data-value="-1"></button>
                 <button data-value="-0.67"></button>
@@ -168,7 +167,7 @@
                 <button data-value="0.67"></button>
                 <button data-value="1"></button>
             </div>
-            <div class="slider-labels" id="slider-label-right">General Profiles</div>
+            <div class="slider-labels" id="slider-label-right">Strongly Prefer Balanced Beers</div>
         </div>
         <div class="button-container">
             <button id="prev-button" disabled>Previous</button>
@@ -413,7 +412,9 @@
                     viewResultsButton.style.fontSize = "1em";
                     viewResultsButton.style.borderRadius = "5px";
                     viewResultsButton.style.cursor = "pointer";
-                    viewResultsButton.style.width = "auto";
+                    viewResultsButton.style.width = "100%";
+                    viewResultsButton.style.display = "block";
+                    viewResultsButton.style.marginTop = "20px";
                     viewResultsButton.style.marginTop = "20px";
                     document.getElementById("result-container").appendChild(viewResultsButton);
 

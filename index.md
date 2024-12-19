@@ -25,17 +25,23 @@
 
 {% include_relative assets/average_rating.html%}
 {% include_relative assets/distribution_histogram_of_rating_interactive.html%}
+{% include_relative assets/average_rating_analysis.html%}
+
 
 {% include_relative assets/temporal_evolution.html%}
 {% include_relative assets/ratings_by_cluster_and_year_interactive.html%}
+{% include_relative assets/temporal_evolution_analysis.html%}
 
 {% include_relative assets/world_distribution.html%}
 {% include_relative assets/ratings_by_cluster_and_cleaned_location_short_interactive.html%}
+{% include_relative assets/world_distribution_analysis.html%}
 
 
 
 {% include_relative assets/emotions_map.html%}
 
 {% include_relative assets/community.html%}
+
+{% include_relative assets/conclusion.html%}
 
 

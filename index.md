@@ -27,6 +27,7 @@
 
 
 {% include_relative assets/emotions_map.html%}
+
 {% include_relative assets/community.html%}
 
 

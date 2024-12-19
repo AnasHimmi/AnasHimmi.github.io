@@ -2,7 +2,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="{{ "/assets/css/shared.css" | relative_url }}">
-  <script src="{{ "/assets/js/shared.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/shared.js" | relative_url }}" async></script>
+   <script src="{{ "/assets/js/lazysizes.min.js.js" | relative_url}}" async></script>
   {% capture pagetitle %}
     {%- if page.share-title -%}
       {{ page.share-title | strip_html | xml_escape }}

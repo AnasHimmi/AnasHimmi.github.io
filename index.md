@@ -2,6 +2,7 @@
 ---
 {% include_relative assets/recommender/recommender.html%}
 <!--- Part 1
+{% include_relative assets/shared_css.html%}
 
 {% include_relative assets/intro.html%}
 {% include_relative assets/beer_per_cluster.html%}
